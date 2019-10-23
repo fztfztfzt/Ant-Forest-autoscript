@@ -327,14 +327,13 @@ function Ant_forest(automator, unlock) {
       if (descEndsWith("返回").exists()) descEndsWith("返回").findOne(_config.get("timeout_findOne")).click();
       else if (textEndsWith("返回").exists()) textEndsWith("返回").findOne(_config.get("timeout_findOne")).click();
       homePageWaiting()
-      _post_energy = _get_current_energy();
-      _sum_get_energy();
-      log("当前能量：" + _post_energy);
-      _show_floaty("共收取：" + (_post_energy - _pre_energy) + "g 能量");
     }
+    _post_energy = _get_current_energy();
+    _sum_get_energy();
+    log("当前能量：" + _post_energy);
+    _show_floaty("共收取：" + (_post_energy - _pre_energy) + "g 能量");
     if (descEndsWith("关闭").exists()) descEndsWith("关闭").findOne(_config.get("timeout_findOne")).click();
     else if (textEndsWith("关闭").exists()) textEndsWith("关闭").findOne(_config.get("timeout_findOne")).click();
-    home();
   }
 
   const _sum_get_energy = function () {
