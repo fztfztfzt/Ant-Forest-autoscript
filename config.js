@@ -38,7 +38,7 @@ function draw_view() {
           </appbar>
         </frame>
         <vertical w="*" gravity="left" layout_gravity="left" margin="10">
-          <text text="共收取能量：" textColor="#666666" textSize="14sp" text="{{config.get('sum_get_energy',0)}}" />
+          <text textColor="#666666" textSize="14sp" text="共收取能量：{{config.get('sum_get_energy',0)}}" />
           <text text="设置执行模式：" textColor="#666666" textSize="14sp" />
           <radiogroup id="exec_pattern" orientation="horizontal" margin="0 10">
             <radio text="计时" checked="{{!config.get('is_cycle')}}" />
