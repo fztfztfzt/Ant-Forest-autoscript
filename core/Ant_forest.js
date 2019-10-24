@@ -324,9 +324,9 @@ function Ant_forest(automator, unlock) {
   // 记录最终能量值
   const _get_post_energy = function() {
     if (!_fisrt_running && !_has_next) {
-      if (descEndsWith("返回").exists()) descEndsWith("返回").findOne(_config.get("timeout_findOne")).click();
-      else if (textEndsWith("返回").exists()) textEndsWith("返回").findOne(_config.get("timeout_findOne")).click();
     }
+    if (descEndsWith("返回").exists()) descEndsWith("返回").findOne(_config.get("timeout_findOne")).click();
+    else if (textEndsWith("返回").exists()) textEndsWith("返回").findOne(_config.get("timeout_findOne")).click();
     homePageWaiting()
     _post_energy = _get_current_energy();
     _sum_get_energy();
