@@ -331,7 +331,8 @@ function Ant_forest(automator, unlock) {
     _post_energy = _get_current_energy();
     _sum_get_energy();
     log("当前能量：" + _post_energy);
-    _show_floaty("共收取：" + (_post_energy - _pre_energy) + "g 能量");
+    log("本次收取能量：" + (_post_energy - _pre_energy))
+    _post_energy = _pre_energy
     if (descEndsWith("关闭").exists()) descEndsWith("关闭").findOne(_config.get("timeout_findOne")).click();
     else if (textEndsWith("关闭").exists()) textEndsWith("关闭").findOne(_config.get("timeout_findOne")).click();
   }
