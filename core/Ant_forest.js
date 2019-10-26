@@ -689,13 +689,15 @@ function Ant_forest(automator, unlock) {
       });
       while (true) {
         _delay(_min_countdown);
-        _listen_stop();
-        log("第 " + (++_current_time) + " 次运行");
         if(_config.get('only_run_in_close',false) && device.isScreenOn())
         {
           _min_countdown = _config.get("max_collect_wait_time")
+          log("非息屏状态，等待" + str(_min_countdown) + '分钟')
+          toast("非息屏状态，等待" + str(_min_countdown) + '分钟')
           continue;
         }
+        log("第 " + (++_current_time) + " 次运行");
+        _listen_stop();
         _unlock.exec();
         _collect_own();
         _collect_friend();
