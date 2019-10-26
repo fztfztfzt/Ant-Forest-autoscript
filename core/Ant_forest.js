@@ -692,8 +692,8 @@ function Ant_forest(automator, unlock) {
         if(_config.get('only_run_in_close',false) && device.isScreenOn())
         {
           _min_countdown = _config.get("max_collect_wait_time")
-          log("非息屏状态，等待" + str(_min_countdown) + '分钟')
-          toast("非息屏状态，等待" + str(_min_countdown) + '分钟')
+          log("非息屏状态，等待" + _min_countdown + '分钟')
+          toast("非息屏状态，等待" + _min_countdown + '分钟')
           continue;
         }
         log("第 " + (++_current_time) + " 次运行");
