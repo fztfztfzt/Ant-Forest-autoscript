@@ -57,6 +57,13 @@ function draw_view() {
             <radio text="否" checked="{{!config.get('help_friend')}}" marginLeft="20" />
           </radiogroup>
         </vertical>
+        <vertical w="*" gravity="left" layout_gravity="left" margin="10">
+          <text text="仅在息屏时运行：" textColor="#666666" textSize="14sp" />
+          <radiogroup id="only_run_in_close" orientation="horizontal" margin="0 10">
+            <radio text="是" checked="{{config.get('only_run_in_close',false)}}" />
+            <radio text="否" checked="{{!config.get('only_run_in_close',false)}}" marginLeft="20" />
+          </radiogroup>
+        </vertical>
         <horizontal w="*" h="1sp" bg="#cccccc" margin="10 0"></horizontal>
           <vertical w="*" gravity="left" layout_gravity="left" margin="10">
             <text text="颜色偏移量：" textColor="#666666" textSize="14sp" />
@@ -134,6 +141,17 @@ function draw_view() {
     }
   });
 
+  // 仅在息屏时运行
+  ui.only_run_in_close.setOnCheckedChangeListener(function(radioGroup, id) {
+    let index = (id + 1) % radioGroup.getChildCount();
+    //toast(radioGroup.getChildAt(index).getText());
+    if (radioGroup.getChildAt(index).getText() == "是") {
+      update("only_run_in_close", true);
+    } else {
+      update("only_run_in_close", false);
+    }
+  });
+  
   // 更新颜色偏移
   ui.emitter.on("pause", () => {
     if (config.contains("color_offset")) {
