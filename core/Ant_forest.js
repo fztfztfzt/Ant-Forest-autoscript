@@ -261,29 +261,8 @@ function Ant_forest(automator, unlock) {
       // delay时间为0时直接跳过
       return;
     }
-    let startTime = new Date().getTime();
-    let timestampGap = minutes * 60000;
-    let i = 0;
-    let showLogTimePoint = -1
-    let showLogGap = 0
-    for (;;) {
-      let now = new Date().getTime();
-      if (now - startTime >= timestampGap) {
-        // 当前已经过时间大于设定的延迟时间则直接退出
-        break;
-      }
-      i = (now - startTime) / 60000;
-      let left = minutes - i;
-      // 距离上一次打印日志的间隔
-      showLogGap = i - showLogTimePoint
-      // 每半分钟打印一次
-      if (showLogGap > 0.5) {
-        showLogTimePoint = i
-        log("距离下次运行还有 " + left.toFixed(2) + " 分钟");
-      }
-      // 睡眠500毫秒
-      sleep(500)
-    }
+    log("距离下次运行还有 " + minutes + " 分钟");
+    sleep(minutes * 60 * 1000);
   }
 
   /***********************
@@ -697,7 +676,6 @@ function Ant_forest(automator, unlock) {
           continue;
         }
         log("第 " + (++_current_time) + " 次运行");
-        _listen_stop();
         _unlock.exec();
         _collect_own();
         _collect_friend();
