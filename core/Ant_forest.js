@@ -257,11 +257,11 @@ function Ant_forest(automator, unlock) {
   // 按分钟延时
   const _delay = function (minutes) {
     minutes = typeof minutes != null ? minutes : 0;
+    log("距离下次运行还有 " + minutes + " 分钟");
     if (minutes === 0) {
       // delay时间为0时直接跳过
       return;
     }
-    log("距离下次运行还有 " + minutes + " 分钟");
     sleep(minutes * 60 * 1000);
   }
 
@@ -668,9 +668,10 @@ function Ant_forest(automator, unlock) {
       });
       while (true) {
         _delay(_min_countdown);
+        G.log('息屏运行：' + _config.get('only_run_in_close',false) + " " + device.isScreenOn());
         if(_config.get('only_run_in_close',false) && device.isScreenOn())
         {
-          _min_countdown = _config.get("max_collect_wait_time")
+          _min_countdown = _config.get("max_collect_wait_time",0)
           log("非息屏状态，等待" + _min_countdown + '分钟')
           toast("非息屏状态，等待" + _min_countdown + '分钟')
           continue;
@@ -687,6 +688,8 @@ function Ant_forest(automator, unlock) {
         }
       }
       thread.interrupt();
+      back();
+      back();
     }
   }
 }
