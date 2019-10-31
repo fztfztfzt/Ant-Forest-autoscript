@@ -53,30 +53,6 @@ function Ant_forest(automator, unlock) {
     }); 
   }
 
-  // 显示文字悬浮窗
-  const _show_floaty = function(text) {
-    let window = floaty.window(
-      <card cardBackgroundColor = "#aa000000" cardCornerRadius = "20dp">
-        <horizontal w = "250" h = "40" paddingLeft = "15" gravity="center">
-          <text id = "log" w = "180" h = "30" textSize = "12dp" textColor = "#ffffff" layout_gravity="center" gravity="left|center"></text>
-          <card id = "stop" w = "30" h = "30" cardBackgroundColor = "#fafafa" cardCornerRadius = "15dp" layout_gravity="right|center" paddingRight = "-15">
-            <text w = "30" h = "30" textSize = "16dp" textColor = "#000000" layout_gravity="center" gravity="center">×</text>
-          </card>
-        </horizontal>
-      </card>
-    );
-    window.stop.on("click", () => {
-      exit()
-    });
-    ui.run(function () {
-      window.log.text(text)
-    })
-    // 30秒后关闭，防止立即停止
-    setTimeout(() => {
-      exit()
-    }, 1000 * 30)
-  }
-
   // 同步获取 toast 内容
   const _get_toast_sync = function(filter, limit, exec) {
     filter = (typeof filter == null) ? "" : filter;
@@ -246,6 +222,9 @@ function Ant_forest(automator, unlock) {
         _has_next = false;
       }
     } else {
+      if(_min_countdown == null){
+        _min_countdown = _config.get("max_collect_wait_time")
+      }
       if (_min_countdown != null && _min_countdown <= _config.get("max_collect_wait_time")) {
         _has_next = true;
       } else {
@@ -671,7 +650,7 @@ function Ant_forest(automator, unlock) {
         log('息屏运行：' + _config.get('only_run_in_close',false) + " " + device.isScreenOn());
         if(_config.get('only_run_in_close',false) && device.isScreenOn())
         {
-          _min_countdown = _config.get("max_collect_wait_time",0)
+          _min_countdown = 60
           log("非息屏状态，等待" + _min_countdown + '分钟')
           toast("非息屏状态，等待" + _min_countdown + '分钟')
           continue;
@@ -682,14 +661,14 @@ function Ant_forest(automator, unlock) {
         _collect_friend();
         if (_config.get("is_cycle")) sleep(1000);
         events.removeAllListeners();
+        back();
+        back();
         if (_has_next == false) {
           log("收取结束");
           break;
         }
       }
       thread.interrupt();
-      back();
-      back();
     }
   }
 }
