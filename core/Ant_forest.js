@@ -360,7 +360,10 @@ function Ant_forest(automator, unlock) {
   
   // 判断是否可收取
   const _is_obtainable = function(obj, screen) {
+    images.save(screen,"/sdcard/fzttest1.jpg", "jpg", 50)
     screen = images.rotate(screen,-90);
+    images.save(screen,"/sdcard/fzttest2.jpg", "jpg", 50)
+
     let len = obj.childCount();
     let x = obj.child(len - 3).bounds().right,
         y = obj.bounds().top,
