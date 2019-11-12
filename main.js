@@ -12,7 +12,7 @@
 auto();
 
 // 请求截图权限
-if (! requestScreenCapture(true)) {
+if (! requestScreenCapture()) {
   toast("请求截图失败");
   exit();
 }
